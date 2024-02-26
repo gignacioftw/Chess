@@ -143,112 +143,117 @@ class Board {
 					break;
 				}
 			}
-			switch (initialPiece.pieceType) {
-				case WP:
-					if (Character.getNumericValue(secondSquare.charAt(1)) == 8){
-						
-						p.remove(initialPiece);
-
-						if (specifier.equalsIgnoreCase("N")){
-							Knight n = new Knight(takenpiece.pieceFile, ((int)takenpiece.pieceRank), PieceType.WN);
-							p.add(n);
-						}
-						else if (specifier.equalsIgnoreCase("R")){
-							Rook r = new Rook(takenpiece.pieceFile, ((int)takenpiece.pieceRank), PieceType.WR);
-							p.add(r);
-						}
-						else if (specifier.equalsIgnoreCase("B")){
-							Bishop b = new Bishop(takenpiece.pieceFile, ((int)takenpiece.pieceRank), PieceType.WB);
-							p.add(b);
-						}
-						else if (specifier.equalsIgnoreCase("Q")){
-							Queen q = new Queen(takenpiece.pieceFile, ((int)takenpiece.pieceRank), PieceType.WQ);
-							p.add(q);
-						}
-						else {
-							Queen q = new Queen(takenpiece.pieceFile, ((int)takenpiece.pieceRank), PieceType.WQ);
-							p.add(q);
-						}
-					}
-					else {
-						new Pawn().move(firstSquare, secondSquare, p);
-					}
-					break;
-				case BP:
-					if (Character.getNumericValue(secondSquare.charAt(1)) == 1){
+			if(typeMove(initialPiece, Chess.i)){
+				switch (initialPiece.pieceType) {
+					case WP:
+						if (Character.getNumericValue(secondSquare.charAt(1)) == 8){
 							
-						p.remove(initialPiece);
+							p.remove(initialPiece);
 
-						if (specifier.equalsIgnoreCase("N")){
-							Knight n = new Knight(takenpiece.pieceFile, ((int)takenpiece.pieceRank), PieceType.BN);
-							p.add(n);
-						}
-						else if (specifier.equalsIgnoreCase("R")){
-							Rook r = new Rook(takenpiece.pieceFile, ((int)takenpiece.pieceRank), PieceType.BR);
-							p.add(r);
-						}
-						else if (specifier.equalsIgnoreCase("B")){
-							Bishop b = new Bishop(takenpiece.pieceFile, ((int)takenpiece.pieceRank), PieceType.BB);
-							p.add(b);
-						}
-						else if (specifier.equalsIgnoreCase("Q")){
-							Queen q = new Queen(takenpiece.pieceFile, ((int)takenpiece.pieceRank), PieceType.BQ);
-							p.add(q);
+							if (specifier.equalsIgnoreCase("N")){
+								Knight n = new Knight(takenpiece.pieceFile, ((int)takenpiece.pieceRank), PieceType.WN);
+								p.add(n);
+							}
+							else if (specifier.equalsIgnoreCase("R")){
+								Rook r = new Rook(takenpiece.pieceFile, ((int)takenpiece.pieceRank), PieceType.WR);
+								p.add(r);
+							}
+							else if (specifier.equalsIgnoreCase("B")){
+								Bishop b = new Bishop(takenpiece.pieceFile, ((int)takenpiece.pieceRank), PieceType.WB);
+								p.add(b);
+							}
+							else if (specifier.equalsIgnoreCase("Q")){
+								Queen q = new Queen(takenpiece.pieceFile, ((int)takenpiece.pieceRank), PieceType.WQ);
+								p.add(q);
+							}
+							else {
+								Queen q = new Queen(takenpiece.pieceFile, ((int)takenpiece.pieceRank), PieceType.WQ);
+								p.add(q);
+							}
 						}
 						else {
-							Queen q = new Queen(takenpiece.pieceFile, ((int)takenpiece.pieceRank), PieceType.BQ);
-							p.add(q);
+							new Pawn().move(firstSquare, secondSquare, p);
 						}
-					}
-					else {
-						new Pawn().move(firstSquare, secondSquare, p);
-					}
-					break;
-				case WR, BR:
-					new Rook().move(firstSquare, secondSquare, p);
-					break;
-				case WN, BN:
-					new Knight().move(firstSquare, secondSquare, p);
-					break;
-				case WB, BB:
-					new Bishop().move(firstSquare, secondSquare, p);
-					break;
-				case WK: // make sure that rook is unmoved also
-					if (!hasTile("f1", p) && !hasTile("g1", p) && secondSquare.equalsIgnoreCase("g1")){
-						new King().move(firstSquare, secondSquare, p);
-						new Rook().move("h1", "f1", p);
-					}
-					else if (!hasTile("d1", p) && !hasTile("c1", p) && !hasTile("b1", p) && secondSquare.equalsIgnoreCase("c1")){
-						new King().move(firstSquare, secondSquare, p);
-						new Rook().move("a1", "d1", p);
-					}
-					else {
-						new King().move(firstSquare, secondSquare, p);
-					}
+						break;
+					case BP:
+						if (Character.getNumericValue(secondSquare.charAt(1)) == 1){
+								
+							p.remove(initialPiece);
 
-					break;
-				case BK:
-					if (!hasTile("f8", p) && !hasTile("g8", p) && secondSquare.equalsIgnoreCase("g8")){
-						new King().move(firstSquare, secondSquare, p);
-						new Rook().move("h8", "f8", p);
-					}
-					else if (!hasTile("d8", p) && !hasTile("c8", p) && !hasTile("b8", p) && secondSquare.equalsIgnoreCase("c8")){
-						new King().move(firstSquare, secondSquare, p);
-						new Rook().move("a8", "d8", p);
-					}
-					else {
-						new King().move(firstSquare, secondSquare, p);
-					}
+							if (specifier.equalsIgnoreCase("N")){
+								Knight n = new Knight(takenpiece.pieceFile, ((int)takenpiece.pieceRank), PieceType.BN);
+								p.add(n);
+							}
+							else if (specifier.equalsIgnoreCase("R")){
+								Rook r = new Rook(takenpiece.pieceFile, ((int)takenpiece.pieceRank), PieceType.BR);
+								p.add(r);
+							}
+							else if (specifier.equalsIgnoreCase("B")){
+								Bishop b = new Bishop(takenpiece.pieceFile, ((int)takenpiece.pieceRank), PieceType.BB);
+								p.add(b);
+							}
+							else if (specifier.equalsIgnoreCase("Q")){
+								Queen q = new Queen(takenpiece.pieceFile, ((int)takenpiece.pieceRank), PieceType.BQ);
+								p.add(q);
+							}
+							else {
+								Queen q = new Queen(takenpiece.pieceFile, ((int)takenpiece.pieceRank), PieceType.BQ);
+								p.add(q);
+							}
+						}
+						else {
+							new Pawn().move(firstSquare, secondSquare, p);
+						}
+						break;
+					case WR, BR:
+						new Rook().move(firstSquare, secondSquare, p);
+						break;
+					case WN, BN:
+						new Knight().move(firstSquare, secondSquare, p);
+						break;
+					case WB, BB:
+						new Bishop().move(firstSquare, secondSquare, p);
+						break;
+					case WK: // make sure that rook is unmoved also
+						if (!hasTile("f1", p) && !hasTile("g1", p) && secondSquare.equalsIgnoreCase("g1")){
+							new King().move(firstSquare, secondSquare, p);
+							new Rook().move("h1", "f1", p);
+						}
+						else if (!hasTile("d1", p) && !hasTile("c1", p) && !hasTile("b1", p) && secondSquare.equalsIgnoreCase("c1")){
+							new King().move(firstSquare, secondSquare, p);
+							new Rook().move("a1", "d1", p);
+						}
+						else {
+							new King().move(firstSquare, secondSquare, p);
+						}
 
-					break;
-				case WQ, BQ:
-					new Queen().move(firstSquare, secondSquare, p);
-					break;
-				default:
-					break;
+						break;
+					case BK:
+						if (!hasTile("f8", p) && !hasTile("g8", p) && secondSquare.equalsIgnoreCase("g8")){
+							new King().move(firstSquare, secondSquare, p);
+							new Rook().move("h8", "f8", p);
+						}
+						else if (!hasTile("d8", p) && !hasTile("c8", p) && !hasTile("b8", p) && secondSquare.equalsIgnoreCase("c8")){
+							new King().move(firstSquare, secondSquare, p);
+							new Rook().move("a8", "d8", p);
+						}
+						else {
+							new King().move(firstSquare, secondSquare, p);
+						}
+
+						break;
+					case WQ, BQ:
+						new Queen().move(firstSquare, secondSquare, p);
+						break;
+					default:
+						break;
+				}
+				p.remove(takenpiece);
+				return null;
 			}
-			p.remove(takenpiece);
-			return null;
+			else{
+				return ReturnPlay.Message.ILLEGAL_MOVE;
+			}
 		}
 		else {
 			return ReturnPlay.Message.ILLEGAL_MOVE;
@@ -278,6 +283,26 @@ class Board {
 		}
 		return false;
 	}
+
+	//this manages the take turns and the white goes first
+	public static boolean typeMove(ReturnPiece p, int i){
+		PieceType pt = p.pieceType;
+		String s = pt.name();
+
+		if(s.charAt(0) == 'W' && i == 0){
+			Chess.i++;
+			return true;
+		}
+		else if(s.charAt(0) == 'B' && i == 1){
+			Chess.i--;
+			return true;
+
+		}
+		else{
+			return false;
+		}	
+	}
+	
 	
 	//i intend this method to detect if there is something in its path
 	//lowkey need to figure out how to do this
